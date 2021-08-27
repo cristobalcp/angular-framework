@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/authentication/authentication.service';
 
 @Component({
   selector: 'app-not-found',
@@ -7,11 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
   private path : string = "";
-  constructor() { }
-
+  
+  constructor(private auth: AuthService,
+    private ngZone: NgZone,
+    private router: Router) { }
+  
+  // Check si Logged In, redirect Login si False
   ngOnInit(): void {
-      this.path = "/";
+    if (!this.auth.isLoggedIn) {
+      this.ngZone.run(() => {
+        this.router.navigate(['/login']);
+      });
+    }
+    this.path = "/";
+    return;
   }
   
+  logOut() {
+    this.auth.SignOut();
+    return false;
+  }
+
   getPath(): string { return this.path; }
 }

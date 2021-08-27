@@ -1,0 +1,120 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+:root {
+    /* Colores base */
+    --tender-bg: #E1E1E1;
+    --tender-bg-tr: #e1e1e1d3;
+    --tender-bg-inverse: #090705;
+    --tender-navbar: #FFFFFF;
+    --tender-table-odd: #F5F5F5;
+
+    --tender-main: #00A1E0;
+    --tender-main-tr: #00a0e0b3;
+    --tender-main-tr-lote: #00a0e088;
+    --tender-main-tr-min: #00a0e052;
+    --tender-main-min: #f1f6f8;
+
+    --tender-accent-green: #278806;
+    --tender-accent-green-tr: #268806aa;
+    --tender-accent-green-tr-min: #26880648;
+
+    --tender-accent-blue: #03335D;
+    --tender-accent-blue-tr: #03335db6;
+
+    --tender-blue-pallette: #5DDCDA;
+    --tender-blue-pallette2: #00A29E;
+
+    --tender-orange: #F09E01;
+    --tender-yellow: #E9CD7A;
+
+    --tender-green: #278806;
+    --tender-green-tr: #2688069d;
+
+    --tender-blue: #03335D;
+    --tender-blue-tr: #03335d9e;
+
+    --tender-red: #AB1120;
+    --tender-red-tr: #ab112098;
+
+    --tender-font: #f8fafc;
+
+    --tender-white: #f8fafc;
+    --tender-black: #1f1e1c;
+    --tender-black-tr: #1f1e1cd7;
+    --tender-black-tr-min: #1f1e1c73;
+
+    --tender-grey: #95969d;
+    --tender-grey-tr: #95969db4;
+    --tender-grey-tr-min: #95969d57;
+    --pure-white: #fff;
+    --pure-black: #000;
+
+    --tender-paletteA: #03335D;
+    --tender-paletteB: #00A1E0;
+    --tender-paletteC: #00A29E;
+    --tender-paletteD: #CCFBFA;
+
+    --tender-alta: #8BBE1A;
+    --tender-media: #FED41E;
+    --tender-baja: #DA513E;
+
+    /* Tamaños de letra */
+    --h1: 5.813rem;
+    --h2: 3.625rem;
+    --h3: 2.875rem;
+    --h4: 2.063rem;
+    --h5: 1.438rem;
+    --h6: 1.050rem;
+    --h51: 1.250rem;
+
+    --st1: 0.938rem;
+    --st2: 0.813rem;
+    --st3: 0.750rem;
+
+    --b1: 1rem;
+    --b2: .875rem;
+    --b3: .675rem;
+
+    --ol: .625rem;
+
+    /* Espaciado entre letras */
+    --ls0: 0rem;
+    --lsh1: -0.015rem;
+    --lsh2: -0.083rem;
+    --lsh3: 0rem;
+    --lsh4: 0.007rem;
+    --lsh5: 0rem;
+    --lsh6: 0.007rem;
+
+    --lsb1: 0.031rem;
+    --lsb2: 0.018rem;
+
+    --lsbtn: 0.089rem;
+
+    --lsol: 0.15rem;
+
+    /* Grosor de letra */
+    --regular: 400;
+    --light: 300;
+    --medium: 500;
+    --bold: 700;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: var(--regular);
+    letter-spacing: var(--ls1);
+}
+
+
+button.btn.btn-primary:is(:disabled){
+    background-color: var(--tender-grey) !important;
+    color: var(--tender-font) !important;
+    cursor: not-allowed !important;
+}

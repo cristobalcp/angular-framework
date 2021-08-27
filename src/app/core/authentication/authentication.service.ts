@@ -1,6 +1,8 @@
-import { Injectable, NgZone } from '@angular/core';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
-  sendPasswordResetEmail, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { Injectable, NgZone, OnInit } from '@angular/core';
+import {
+  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  sendPasswordResetEmail, sendEmailVerification, signOut
+} from "firebase/auth";
 import { Router } from "@angular/router";
 import { User } from 'src/app/shared/services/user';
 
@@ -9,57 +11,100 @@ import { User } from 'src/app/shared/services/user';
 })
 
 export class AuthService {
-  userData: any; // Save logged in user data
-  public auth : any;
+  public userData: any;
+  public auth: any;
 
   constructor(
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone
   ) {
-    this.auth = getAuth();
+    this.initService();
+    return;
   }
 
-  // Sign in with email/password
+  /**
+   * Inicia el Servicio de Auth de Firebase
+   */
+  private initService() {
+    this.auth = getAuth();
+    this.auth.languageCode = navigator?.language?.split("-")[0]  || 'es';   
+    return;
+  }
+
+  /**
+   * Sign in process with email/password
+   * @param  {string} email
+   * @param  {string} password
+   */
   SignIn(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((result: any) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['']);
-        });
+        // SAVE USER DATA        
         this.SetUserData(result.user);
+
+        // IF IS NOT VERIFIED DONT LOGIN
+        if (result.user.emailVerified) {
+          return this.ngZone.run(() => {
+            this.router.navigate(['/home']);
+          });
+        }
+
+        return window.alert(`Por favor, verifique su correo electrónico mediante el Email que le hemos enviado a ${result.user.email}.`);
+
       }).catch((error: any) => {
-        window.alert(error.message)
-      })
+        window.alert(error.message);
+
+      });
   }
 
-  // Sign up with email/password
+  /**
+   * Sign up process with email/password
+   * @param  {string} email
+   * @param  {string} password
+   */
   SignUp(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password)
       .then((result: any) => {
+        // Email Verification
+        sendEmailVerification(result.user);
+        // Saves User Data in BBDD
         this.SetUserData(result.user);
+
+        window.alert(`Se ha enviado un correo electrónico a ${result.user.email}, verifique su correo antes de continuar.`);
       }).catch((error: any) => {
-        window.alert(error.message)
-      })
+        window.alert(error.message);
+        localStorage.removeItem('user');
+      });
   }
-  // Reset Forggot password
-  ForgotPassword(passwordResetEmail: any) {
+
+  /**
+   * Reset Forgotten password of an Email
+   * @param  {string} passwordResetEmail
+   */
+  ForgotPassword(passwordResetEmail: string) {
     return sendPasswordResetEmail(this.auth, passwordResetEmail)
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
       }).catch((error: any) => {
-        window.alert(error)
+        window.alert(error);
       })
   }
 
-  // Returns true when user is looged in and email is verified
+  /**
+   * Returns true when user is looged in and email is verified
+   * @returns boolean
+   */
   get isLoggedIn(): boolean {
-    const user = JSON.parse(`${localStorage.getItem('user')}`);
-    return (user !== "null" && user.emailVerified !== false) ? true : false;
+    const user = localStorage.getItem('user');    
+    return (user !== null && JSON.parse(user)?.emailVerified) ? true : false;
   }
 
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+
+  /**
+   * Setting up user data when: Sign in with 
+   * username/password, Sign up with username/password
+   * @param  {any} user
+   */
   SetUserData(user: any) {
     const userData: User = {
       uid: user.uid,
@@ -68,27 +113,22 @@ export class AuthService {
       createdAt: user.createdAt,
       emailVerified: user.emailVerified
     }
+
     localStorage.setItem('user', JSON.stringify(userData));
     return;
   }
 
-  // Sign out 
+  /**
+   *  Sign out Actual User
+   */
   SignOut() {
-
-    localStorage.setItem('user', 'false');
-    
-    console.log("adios,",  localStorage.getItem('user'));
-
-    return signOut(this.auth).then(() => {
-      
-      setTimeout(() => {
-        this.router.navigate(['']);
-      }, 1000);
-
-    }).catch((error: any)=>{
-      console.log(error);
-    
-    });
+    return signOut(this.auth)
+      .then(() => {
+        localStorage.removeItem('user');
+        this.router.navigate(['/login']);
+      }).catch((error: any) => {
+        window.alert(error);
+      });
   }
 
 }
