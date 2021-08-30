@@ -1,6 +1,11 @@
-<h2>
-  404 - Page not found
-</h2>
-<p *ngIf="getPath()">You might want to go to the 
-    "{{ getPath() }}" page
-</p>
+<app-header></app-header>
+
+<div class="container mt-2">
+  <h2 class="text-muted">
+    404 - Page not found
+  </h2>
+  <p *ngIf="getPath()">You might want to go to the 
+    <a href="{{  getPath() }}"> "{{ getPath() }}"</a>
+    page
+  </p>
+</div>

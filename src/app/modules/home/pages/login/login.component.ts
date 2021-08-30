@@ -1,9 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
-import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -12,65 +10,54 @@ import * as firebase from 'firebase/app';
 })
 
 export class LoginComponent implements OnInit {
-  afAuth: any = false;
-
+  
   public isActive: boolean = false;
-  errorMessage = '';
+  public errorMessage : string = '';
+
+  public loginForm : FormGroup = this.fb.group({
+    username: new FormControl("", [
+      Validators.required,
+      Validators.email
+    ]), 
+    password: new FormControl("", [
+      Validators.required,
+      Validators.minLength(6)
+    ]) 
+  });
 
   constructor(private router: Router,
     private fb: FormBuilder,
     private ngZone: NgZone,
     private auth: AuthService) {
-      this.afAuth = getAuth();
-     }
+  }
 
-  loginForm = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
-  })
-
+  // Check si Log In, redirect Home si True
   ngOnInit() {
-    console.log(localStorage.getItem('user'));
-    
-    if(this.auth.isLoggedIn){
+    if (this.auth.isLoggedIn) {
       this.ngZone.run(() => {
-        
         this.router.navigate(['/home']);
-      })
+      });
     }
-      
   }
 
-  // Create User Email Passwordw
+  // Crea User con Email+Password
   createUser() {
-    createUserWithEmailAndPassword(this.afAuth, this.loginForm.value.username, this.loginForm.value.password).then(() => {
-      this.router.navigate(['/home']);
-    }).catch((response : any) => {
-      this.errorMessage = response.message;
-    });
+    return this.auth.SignUp(this.loginForm.value.username, this.loginForm.value.password);
   }
 
-  // Sign In Email-Password
+  // Iniciar Sesión con Email+Password
   signIn() {
-    signInWithEmailAndPassword(this.afAuth, this.loginForm.value.username, this.loginForm.value.password)
-      .then(() => {
-        // localStorage.setItem("user", "true");
-        this.router.navigate(['/home']);
-      }).catch((response : any) => {
-        this.errorMessage = response.message;
-      });
+    this.auth.SignIn(this.loginForm.value.username, this.loginForm.value.password);
+    return;
   }
 
-  // Reset Forggot password
+  // Reset Forgot password
   ForgotPassword() {
-    return sendPasswordResetEmail(this.afAuth, this.loginForm.value.username)
-      .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
-      }).catch((error :any) => {
-        this.errorMessage = error;
-      });
+    this.auth.ForgotPassword(this.loginForm.value.username);
+    return;
   }
 
+  // Cambia el tipo de input del password, text/password
   toggleInput() {
     return this.isActive = !this.isActive;
   }
