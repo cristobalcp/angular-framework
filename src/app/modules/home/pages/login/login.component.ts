@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     console.log(localStorage.getItem('user'));
     
-    if(this.isLoggedIn){
+    if(this.auth.isLoggedIn){
       this.ngZone.run(() => {
         
         this.router.navigate(['/home']);
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       
   }
 
-  // Create User Email Password
+  // Create User Email Passwordw
   createUser() {
     createUserWithEmailAndPassword(this.afAuth, this.loginForm.value.username, this.loginForm.value.password).then(() => {
       this.router.navigate(['/home']);
@@ -54,14 +54,12 @@ export class LoginComponent implements OnInit {
   signIn() {
     signInWithEmailAndPassword(this.afAuth, this.loginForm.value.username, this.loginForm.value.password)
       .then(() => {
-        localStorage.setItem("user", "true");
+        // localStorage.setItem("user", "true");
         this.router.navigate(['/home']);
       }).catch((response : any) => {
         this.errorMessage = response.message;
       });
   }
-
- 
 
   // Reset Forggot password
   ForgotPassword() {
@@ -70,15 +68,11 @@ export class LoginComponent implements OnInit {
         window.alert('Password reset email sent, check your inbox.');
       }).catch((error :any) => {
         this.errorMessage = error;
-      })
+      });
   }
 
-  toggleInput(activar: boolean) {
-    return this.isActive = activar;
+  toggleInput() {
+    return this.isActive = !this.isActive;
   }
-  // Returns true when user is looged in and email is verified
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(`${localStorage.getItem('user')}`);
-    return (user !== "null" && user?.emailVerified !== false) ? true : false;
-  }
+
 }

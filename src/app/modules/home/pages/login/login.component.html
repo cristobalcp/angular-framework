@@ -18,7 +18,7 @@
       <div class="form-group">
         <label for="title" class="ml-4">Correo electrónico*</label>
         <input type="text" id="username" placeholder="Correo electrónico" class="form-control"
-          formControlName="username" />
+          formControlName="username" autocomplete="email" />
         <span class="error"
           *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.required">Correo electrónico
           obligatorio.</span>
@@ -27,13 +27,13 @@
       <div class="form-group">
         <label for="description">
           <!-- Ver texto -->
-          <svg (click)="toggleInput(true)" *ngIf="!isActive" xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+          <svg (click)="toggleInput()" *ngIf="!isActive" xmlns="http://www.w3.org/2000/svg" width="23" height="23"
             fill="currentColor" class="bi bi-eye-fill pointer" viewBox="0 0 16 16">
             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
           </svg>
           <!-- Ocultar texto -->
-          <svg (click)="toggleInput(false)" *ngIf="isActive" xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+          <svg (click)="toggleInput()" *ngIf="isActive" xmlns="http://www.w3.org/2000/svg" width="23" height="23"
             fill="currentColor" class="bi bi-eye-slash-fill pointer" viewBox="0 0 16 16">
             <path
               d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z" />
@@ -46,7 +46,7 @@
 
         <!-- Input password -->
         <input [type]="(isActive) ? 'text' : 'password'" id="password" placeholder="Contraseña" class="form-control"
-          formControlName="password" />
+          formControlName="password" autocomplete="current-password" />
         <span class="error"
           *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.required">
             Contraseña obligatoria.
