@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,13 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 
 export class HomeComponent {
-  url: string = environment.dash_url;
-  constructor() {}
+  url: SafeResourceUrl = this.transform_secure(environment.dash_url);
+  
+  constructor(private sanitized: DomSanitizer) { }
+
+
+  transform_secure(value: string) {
+    return this.sanitized.bypassSecurityTrustResourceUrl(value);
+  }
 
 }
