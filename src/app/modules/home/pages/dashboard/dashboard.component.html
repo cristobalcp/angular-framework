@@ -1,0 +1,57 @@
+<!-- PESOS -->
+<div class="row col-md-12 mt-2 text-center">
+  <h3 class="titulo">
+    Pesos (kg)
+  </h3>
+  <div class="container">
+    <span class="text-muted mx-1">
+        Real
+    </span>
+    <i class="bi bi-droplet-fill" style="color: var(--tender-main)"></i>
+    <br>
+    <span class="text-muted mx-1">
+        Predicción
+    </span>
+    <i class="bi bi-droplet-fill" style="color: var(--tender-accent-blue)"></i>
+  </div>
+</div>
+
+<div class="row col-md-12 my-3">
+  <div class="col-md-6">
+    <dash-chart-line [data]="dataChart1" [hidden]="loading"></dash-chart-line>
+  </div>
+  <div class="col-md-6">
+    <dash-chart-line [data]="dataChart2" [hidden]="loading"></dash-chart-line>
+  </div>
+
+</div>
+
+<!-- VELOCIDADES -->
+<div class="row col-md-12 mt-4 text-center">
+  <h3 class="titulo">
+    Velocidades (m/s)
+  </h3>
+  <div class="container">
+    <span class="text-muted mx-1">
+        Real
+    </span>
+    <i class="bi bi-droplet-fill" style="color: var(--tender-main)"></i>
+    <br>
+    <span class="text-muted mx-1">
+        Predicción
+    </span>
+    <i class="bi bi-droplet-fill" style="color: var(--tender-accent-blue)"></i>
+  </div>
+</div>
+
+<div class="row col-md-12 my-3">
+  <div class="col-md-4">
+    <dash-chart-line [view]="view" [data]="dataChart3" [hidden]="loading"></dash-chart-line>
+  </div>
+  <div class="col-md-4">
+    <dash-chart-line [view]="view" [data]="dataChart4" [hidden]="loading"></dash-chart-line>
+  </div>
+  <div class="col-md-4">
+    <dash-chart-line [view]="view" [data]="dataChart5" [hidden]="loading"></dash-chart-line>
+  </div>
+</div>

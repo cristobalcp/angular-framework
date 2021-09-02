@@ -8,13 +8,16 @@ import { AuthService } from 'src/app/core/authentication/authentication.service'
   styleUrls: ['./not-found.component.css']
 })
 export class NotFoundComponent implements OnInit {
-  private path : string = "";
-  
+  private path: string = "";
+
   constructor(private auth: AuthService,
     private ngZone: NgZone,
     private router: Router) { }
-  
-  // Check si Logged In, redirect Login si False
+
+  /**
+   * Check Logged In or Redirect Login
+   * @returns void
+   */
   ngOnInit(): void {
     if (!this.auth.isLoggedIn) {
       this.ngZone.run(() => {
@@ -24,11 +27,7 @@ export class NotFoundComponent implements OnInit {
     this.path = "/";
     return;
   }
-  
-  logOut() {
-    this.auth.SignOut();
-    return false;
-  }
+
 
   getPath(): string { return this.path; }
 }

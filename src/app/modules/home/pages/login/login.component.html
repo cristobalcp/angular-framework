@@ -1,6 +1,6 @@
 <section class="login-container">
   <div class="visible-container px-5 py-4">
-    
+
     <h3 class="title center mb-3">
       <i class="bi bi-puzzle"></i>
       Angular Framework
@@ -13,9 +13,9 @@
     <form [formGroup]="loginForm">
       <div class="form-group">
         <label for="title" class="ml-4">Correo electrónico*</label>
-        
+
         <input type="text" id="username" placeholder="Correo electrónico" class="form-control"
-          formControlName="username" autocomplete="username"  />
+          formControlName="username" autocomplete="username" />
 
         <span class="error" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.required">
           Correo electrónico obligatorio.
@@ -30,8 +30,9 @@
         </label>
 
         <!-- Input password -->
-        <input [type]="(isActive) ? 'text' : 'password'" id="password" placeholder="Contraseña" class="form-control"
+        <input #password [type]="(isActive) ? 'text' : 'password'" id="password" placeholder="Contraseña" class="form-control"
           formControlName="password" autocomplete="current-password" />
+
         <span class="error" *ngIf="loginForm.get('password')?.touched && !loginForm.get('password')?.valid">
           Contraseña obligatoria (mínimo 6 caracteres).
         </span>
@@ -42,8 +43,7 @@
           Olvidaste la contraseña?
         </a>
 
-        <button class="btn btn-primary" (click)="signIn()" 
-          [disabled]="!loginForm.valid" >
+        <button class="btn btn-primary" (click)="signIn()" [disabled]="!loginForm.valid">
           Iniciar sesión
         </button>
       </div>

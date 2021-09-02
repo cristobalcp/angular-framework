@@ -1,10 +1,14 @@
 import { Injectable, NgZone, OnInit } from '@angular/core';
 import {
   getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
-  sendPasswordResetEmail, sendEmailVerification, signOut
+  sendPasswordResetEmail, sendEmailVerification, signOut, Auth
 } from "firebase/auth";
 import { Router } from "@angular/router";
 import { User } from 'src/app/shared/services/user';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +16,7 @@ import { User } from 'src/app/shared/services/user';
 
 export class AuthService {
   public userData: any;
-  public auth: any;
+  public auth!: Auth;
 
   constructor(
     public router: Router,
@@ -26,6 +30,8 @@ export class AuthService {
    * Inicia el Servicio de Auth de Firebase
    */
   private initService() {
+    registerLocaleData(localeEs, 'es');    
+    initializeApp(environment.firebase);
     this.auth = getAuth();
     this.auth.languageCode = navigator?.language?.split("-")[0]  || 'es';   
     return;

@@ -2,19 +2,22 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { LoginComponent } from './pages/login/login.component';
-import { NotFoundComponent } from '../../shared/not-found/not-found.component';
+import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { HeaderComponent } from 'src/app/shared/components/header/header/header.component';
-import { ChartOneComponent } from './pages/home/components/chart-one/chart-one.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ChartOneComponent } from './pages/dashboard/components/chart1/chart1.component';
+import { Chart2Component } from './pages/dashboard/components/chart2/chart2.component';
+import { ChartLineComponent } from './pages/dashboard/components/chart-line/chart-line.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    ChartOneComponent
+    DashboardComponent,
+    ChartOneComponent,
+    Chart2Component,
+    ChartLineComponent
   ],
   imports: [
     BrowserModule,
@@ -31,12 +37,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   
 }

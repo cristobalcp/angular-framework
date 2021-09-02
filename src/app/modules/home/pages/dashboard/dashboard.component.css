@@ -1,0 +1,14 @@
+body{
+    overflow: hidden !important;
+}
+
+h3.titulo{
+    color: var(--tender-main);
+    font-weight: var(--bold);
+    font-size: var(--h5);
+}
+
+div.container{
+    position: absolute;
+    left: 10vw;
+}

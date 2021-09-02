@@ -4,4 +4,4 @@ export interface User {
     displayName: string;
     emailVerified: boolean;
     createdAt: Date;
- }
+}
