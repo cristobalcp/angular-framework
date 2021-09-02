@@ -16,11 +16,6 @@ export class NotFoundComponent implements OnInit {
   
   // Check si Logged In, redirect Login si False
   ngOnInit(): void {
-    if (!this.auth.isLoggedIn) {
-      this.ngZone.run(() => {
-        this.router.navigate(['/login']);
-      });
-    }
     this.path = "/";
     return;
   }

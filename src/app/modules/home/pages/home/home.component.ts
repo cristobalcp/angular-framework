@@ -13,8 +13,7 @@ export class HomeComponent {
   
   constructor(private sanitized: DomSanitizer) { }
 
-
-  transform_secure(value: string) {
+  transform_secure(value: string) :SafeResourceUrl{
     return this.sanitized.bypassSecurityTrustResourceUrl(value);
   }
 
