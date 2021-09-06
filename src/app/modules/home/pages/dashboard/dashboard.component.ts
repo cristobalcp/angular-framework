@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   dataChart4!: Array<Object>;
   dataChart5!: Array<Object>;
 
-  loading = true;
+  loading = false;
 
   view: any = [400, 350];
   legendPosittion = "bellow";
@@ -38,7 +38,41 @@ export class DashboardComponent implements OnInit {
       });
     }
 
-    this.getData();
+    // SUBSCRIBE TOP CHARTS OBSERVABLES
+
+    // this.getData();
+    this.dataService.chart1().subscribe((data :any) => {   
+      console.log("Nuevos datos Chart1: ", data);
+        if(data[0]["series"].length > 0){
+          this.dataChart1 = data;
+        }
+    });
+
+    this.dataService.chart2().subscribe((data :any) => {   
+      console.log("Nuevos datos Chart2: ", data);
+        if(data[0]["series"].length > 0){
+          this.dataChart2 = data;
+        }
+    });
+    this.dataService.chart3().subscribe((data :any) => {   
+      console.log("Nuevos datos Chart3: ", data);
+        if(data[0]["series"].length > 0){
+          this.dataChart3 = data;
+        }
+    });
+    this.dataService.chart4().subscribe((data :any) => {   
+      console.log("Nuevos datos Chart4: ", data);
+        if(data[0]["series"].length > 0){
+          this.dataChart4 = data;
+        }
+    });
+    this.dataService.chart5().subscribe((data :any) => {   
+      console.log("Nuevos datos Chart5: ", data);
+        if(data[0]["series"].length > 0){
+          this.dataChart5 = data;
+        }
+    });
+
     return;
   }
 
@@ -74,5 +108,10 @@ export class DashboardComponent implements OnInit {
       return;
     });
   }
+
+  sendButtonClick() {
+    this.dataService.sendMessage("TESTING SEND");
+  }
+
 
 }

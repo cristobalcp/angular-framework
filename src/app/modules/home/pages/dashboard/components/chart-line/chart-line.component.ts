@@ -72,8 +72,10 @@ export class ChartLineComponent implements OnInit {
   onResize(event: Event) {
     const wind = event.target as Window;
     if (this.isBig) {
+      // CHARTS PESO
       this.view = [wind.innerWidth / 2.1, 400];
     } else {
+      // CHARTS VELOCIDAD
       this.view = [wind.innerWidth / 3.1, 350];
     }
   }
