@@ -1,7 +1,7 @@
 <ngx-charts-line-chart
-    (window:resize)="onResize($event)"
     [view]="view" 
     [scheme]="colorScheme"
+    [schemeType]="schemeType"
     [results]="data"
     [gradient]="gradient"
     [xAxis]="showXAxis"
@@ -13,5 +13,5 @@
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
     [autoScale]="autoScale"
-    (select)="onSelect($event)">
+    (window:resize)="onResize($event)">
 </ngx-charts-line-chart>

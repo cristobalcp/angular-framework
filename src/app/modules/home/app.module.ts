@@ -12,22 +12,18 @@ import { AuthService } from 'src/app/core/authentication/authentication.service'
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
+// import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ChartOneComponent } from './pages/dashboard/components/chart1/chart1.component';
-import { Chart2Component } from './pages/dashboard/components/chart2/chart2.component';
 import { ChartLineComponent } from './pages/dashboard/components/chart-line/chart-line.component';
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent, 
     LoginComponent,
-    HomeComponent,
+    // HomeComponent,
     HeaderComponent,
     DashboardComponent,
-    ChartOneComponent,
-    Chart2Component,
     ChartLineComponent
   ],
   imports: [
@@ -40,10 +36,8 @@ import { ChartLineComponent } from './pages/dashboard/components/chart-line/char
     NgxChartsModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+  providers: [ AuthService ],
+  bootstrap: [ AppComponent ]
 })
 
-export class AppModule {
-  
-}
+export class AppModule { }

@@ -52,6 +52,7 @@ export class AuthService {
         if (result.user.emailVerified) {
           return this.ngZone.run(() => {
             this.router.navigate(['/home']);
+            window.location.reload();
           });
         }
 

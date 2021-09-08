@@ -12,3 +12,7 @@ div.container{
     position: absolute;
     left: 10vw;
 }
+
+.row.col-md-12.disabled{
+    background-color: var(--tender-grey-tr-min);
+}

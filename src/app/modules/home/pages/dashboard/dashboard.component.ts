@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   dataChart3!: Array<Object>;
   dataChart4!: Array<Object>;
   dataChart5!: Array<Object>;
-
+  stopped = false;
   loading = false;
 
   view: any = [400, 350];
@@ -39,79 +39,54 @@ export class DashboardComponent implements OnInit {
     }
 
     // SUBSCRIBE TOP CHARTS OBSERVABLES
-
-    // this.getData();
-    this.dataService.chart1().subscribe((data :any) => {   
-      console.log("Nuevos datos Chart1: ", data);
-        if(data[0]["series"].length > 0){
+    this.dataService.chart1Data().subscribe((data: any) => {
+      console.log(data, typeof(data));
+      
+        if (data[0]["series"].length > 0) {
           this.dataChart1 = data;
         }
+        return;
+      }, (error) => {
+        console.warn("Error cargando grafico 1: ", error);
+        return;
     });
 
-    this.dataService.chart2().subscribe((data :any) => {   
-      console.log("Nuevos datos Chart2: ", data);
-        if(data[0]["series"].length > 0){
-          this.dataChart2 = data;
-        }
+    this.dataService.chart2Data().subscribe((data: any) => {
+      if (data[0]["series"].length > 0) {
+        this.dataChart2 = data;
+      }
+    }, (error) => {
+        console.warn("Error cargando grafico 2: ", error);
+        return;
     });
-    this.dataService.chart3().subscribe((data :any) => {   
-      console.log("Nuevos datos Chart3: ", data);
-        if(data[0]["series"].length > 0){
-          this.dataChart3 = data;
-        }
+
+    this.dataService.chart3Data().subscribe((data: any) => {
+      if (data[0]["series"].length > 0) {
+        this.dataChart3 = data;
+      }
+    }, (error) => {
+        console.warn("Error cargando grafico 3: ", error);
+        return;
     });
-    this.dataService.chart4().subscribe((data :any) => {   
-      console.log("Nuevos datos Chart4: ", data);
-        if(data[0]["series"].length > 0){
-          this.dataChart4 = data;
-        }
+
+    this.dataService.chart4Data().subscribe((data: any) => {
+      if (data[0]["series"].length > 0) {
+        this.dataChart4 = data;
+      }
+    }, (error) => {
+        console.warn("Error cargando grafico 4: ", error);
+        return;
     });
-    this.dataService.chart5().subscribe((data :any) => {   
-      console.log("Nuevos datos Chart5: ", data);
-        if(data[0]["series"].length > 0){
-          this.dataChart5 = data;
-        }
+
+    this.dataService.chart5Data().subscribe((data: any) => {
+      if (data[0]["series"].length > 0) {
+        this.dataChart5 = data;
+      }
+    }, (error) => {
+        console.warn("Error cargando grafico 5: ", error);
+        return;
     });
 
     return;
   }
-
-  private getData() {
-    // GET DATA 1
-    this.dataService.getData().subscribe((result: any) => {
-
-      for (let i = 0; i < result.length; i++) {
-        
-        switch (i) {
-          case 0:
-            this.dataChart1 = result[i];
-            break;
-          case 1:
-            this.dataChart2 = result[i];
-            break;
-          case 2:
-            this.dataChart3 = result[i];
-            break;
-          case 3:
-            this.dataChart4 = result[i];
-            break;
-          case 4:
-            this.dataChart5 = result[i];
-            break;
-          default:
-            break;
-        }
-
-      }
-
-      this.loading = false;
-      return;
-    });
-  }
-
-  sendButtonClick() {
-    this.dataService.sendMessage("TESTING SEND");
-  }
-
-
 }

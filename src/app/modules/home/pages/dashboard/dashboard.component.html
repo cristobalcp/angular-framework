@@ -16,12 +16,12 @@
   </div>
 </div>
 
-<div class="row col-md-12 my-3">
+<div class="row col-md-12 my-3" [ngClass]="{disabled: this.stopped, normal: !this.stopped }">
   <div class="col-md-6">
-    <dash-chart-line [data]="dataChart1" [hidden]="loading"></dash-chart-line>
+    <dash-chart-line [data]="dataChart1" [hidden]="loading" ></dash-chart-line>
   </div>
   <div class="col-md-6">
-    <dash-chart-line [data]="dataChart2" [hidden]="loading"></dash-chart-line>
+    <dash-chart-line [data]="dataChart2" [hidden]="loading" ></dash-chart-line>
   </div>
 
 </div>
@@ -44,14 +44,14 @@
   </div>
 </div>
 
-<div class="row col-md-12 my-3">
+<div class="row col-md-12 my-3" [ngClass]="{disabled: this.stopped, normal: !this.stopped }">
   <div class="col-md-4">
     <dash-chart-line [view]="view" [data]="dataChart3" [hidden]="loading"></dash-chart-line>
   </div>
   <div class="col-md-4">
-    <dash-chart-line [view]="view" [data]="dataChart4" [hidden]="loading"></dash-chart-line>
+    <dash-chart-line [view]="view" [data]="dataChart4" [hidden]="loading" ></dash-chart-line>
   </div>
   <div class="col-md-4">
-    <dash-chart-line [view]="view" [data]="dataChart5" [hidden]="loading"></dash-chart-line>
+    <dash-chart-line [view]="view" [data]="dataChart5" [hidden]="loading" ></dash-chart-line>
   </div>
 </div>

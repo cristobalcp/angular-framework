@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  dash_url: 'http://127.0.0.1:8050/',
+  // dash_url: 'http://127.0.0.1:8050/',
+  dash_url: 'http://127.0.0.1:8000',
   firebase: {
     apiKey: "AIzaSyCnAQsVem6q2C7T8r3QcQyowaa5O5kfEis",
     authDomain: "angular-framework-3e411.firebaseapp.com",

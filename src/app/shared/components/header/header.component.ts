@@ -1,5 +1,5 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 
 @Component({
@@ -12,7 +12,18 @@ export class HeaderComponent {
   @ViewChild("dash") dash!: ElementRef;
   @ViewChild("home") home!: ElementRef;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+      private router: Router){
+
+        // Event Cambio de Ruta (Sin hacer click en menu directamente) 
+        this.router.events.subscribe((val) => {          
+          if(val instanceof NavigationEnd){
+              this.toggleActive(val.urlAfterRedirects.replace("/", ""));
+              return;
+          }
+    });
+      
+  }
   
   // Cerrar sesión
   logOut() {
@@ -21,7 +32,7 @@ export class HeaderComponent {
   }
 
   // Set Active Menu Section
-  toggleActive(id: string) {
+  toggleActive(id: string) {    
     document.querySelector('a.nav-link.active')?.classList.remove('active');
     document.getElementById(id)?.classList.add('active');
     return;

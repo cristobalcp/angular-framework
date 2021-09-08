@@ -1,58 +1,41 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/authentication/authentication.service';
-import { line } from '../../data';
-
+import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'dash-chart-line',
   templateUrl: './chart-line.component.html',
   styleUrls: ['./chart-line.component.css']
 })
+
+// CLASE del COMPONENTE CHART LINE
 export class ChartLineComponent implements OnInit {
 
-  // PARENT RECEIVED VARIABLE
-  @Input() view!: any;
+  // PARENT VARIABLEs
   @Input() data!: any;
-  isBig = false;
-
-  // DATA
-  line: any[] = [];
-
+  @Input() view!: any;
+  isBig : boolean = false;
 
   // options
-  gradient = false;
-  showXAxis = false;
-  showYAxis = true;
-  showLegend = false;
-  showXAxisLabel = true;
-  showYAxisLabel = true;
-  xAxisLabel = 'Población';
-  yAxisLabel = 'Peso (kg)';
-  legendTitle = 'Leyenda';
+  gradient : boolean = false;
+  showXAxis : boolean = false;
+  showYAxis : boolean = true;
+  showLegend : boolean = false;
+  showXAxisLabel : boolean = true;
+  showYAxisLabel : boolean = true;
+  autoScale : boolean = true;
+  xAxisLabel : any = 'Población';
+  yAxisLabel : any = 'Peso (kg)';
+  legendTitle : any = 'Leyenda';
   schemeType: any = 'ordinal';
-  autoScale = true;
   colorScheme: any = {
-    domain: ['#03335D', '#00A1E0', '#00A29E', '#CCFBFA']
+    domain: ['#03335D', '#00A1E0']
   };
 
-
-  constructor(private auth: AuthService,
-    private ngZone: NgZone,
-    private router: Router) {
-    // GET DATA FROM .ts
-    Object.assign(this, { line });
-  }
+  constructor() {}
 
   /**
    * Check Logged In or Redirect Login
    * @returns void
    */
   ngOnInit(): void {
-    if (!this.auth.isLoggedIn) {
-      this.ngZone.run(() => {
-        this.router.navigate(['/login']);
-      });
-    }
     if (this.view === undefined) {
       this.isBig = true;
     }
@@ -60,10 +43,13 @@ export class ChartLineComponent implements OnInit {
     return;
   }
 
+  /**
+   * On Select Chart Line Compontent Event
+   * @param  {Event} event
+   */
   onSelect(event: Event) {
     console.log(event);
   }
-
 
   /**
    * Evento Resize de la Ventana del Navegador (RESPONSIVENESS)
