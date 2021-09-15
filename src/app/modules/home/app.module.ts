@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/core/authentication/authentication.service'
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 import { AppComponent } from './app.component';
-// import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ChartLineComponent } from './pages/dashboard/components/chart-line/chart-line.component';
@@ -21,7 +21,7 @@ import { ChartLineComponent } from './pages/dashboard/components/chart-line/char
     AppComponent,
     NotFoundComponent, 
     LoginComponent,
-    // HomeComponent,
+    HomeComponent,
     HeaderComponent,
     DashboardComponent,
     ChartLineComponent
